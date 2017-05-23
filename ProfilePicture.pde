@@ -6,11 +6,11 @@
 PFont font;
 PImage img;
 boolean showOriginal = false;
-float cellSize = 5;
+float cellSize = 4;
 float scale = 2;
-int imgWidth = 462;
-int imgHeight = 347;
-String txt ="According to all known laws of aviation, there is no way a bee should be able to fly.";
+int imgWidth = 482;
+int imgHeight = 626;
+String txt ="I never knew, how fraustrating weakness was.";
 int txtLength;
 int currentLetter;
 
@@ -20,8 +20,8 @@ void settings() {
 
 void setup() {
   noLoop();
-  img = loadImage("barry.jpg");
-  println(img.width + " x " + img.height);
+  img = loadImage("GONN.jpg");
+ 
   txtLength = txt.length();
 }
 
@@ -35,16 +35,22 @@ void draw() {
     // start both of these loops at 0.
     // one should run while its variable is less than imgHeight,
     // and the other should run while its variable is less than imgWidth
-    for(int y = ___; _________; y += cellSize) {
-      for(int x = ___; _________; x += cellSize) { 
+    for(int y = 0; y < imgHeight; y += cellSize) {
+      for(int x = 0; x < imgWidth; x += cellSize) { 
+        currentLetter = (currentLetter + 1) % txtLength;
         color c = img.pixels[y*imgWidth+x];
         int greyness = round(red(c) * 0.222 + green(c) * 0.707 + blue(c) * 0.071);
         fill(c);
         float xLoc = x * scale;
         float yLoc = y * scale;
         float size = cellSize * scale;
+        //float size = cellSize * scale * noise(x,y);
         // draw an ellipse at xLoc, yLoc, using 'size' for width and height
-        _________________________;
+        rect(xLoc,yLoc,size,size);
+        float textColor = map(greyness, 0, 255, 255, 0); 
+        textSize(cellSize * scale * 1.6);
+        fill(textColor);
+        text(txt.charAt(currentLetter), xLoc, yLoc);
 
       }
     }
